@@ -1,22 +1,32 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.request.DriverRequest;
+import com.example.demo.dto.response.DriverResponse;
 import com.example.demo.entity.Driver;
-import com.example.demo.repository.DriverRespository;
+import com.example.demo.mapper.DriverMapper;
+import com.example.demo.repository.DriverRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DriverService {
 
-    private final DriverRespository driverRespository;
+    private final DriverRepository driverRespository;
 
-    public DriverService(DriverRespository driverRespository) {
+    public DriverService(DriverRepository driverRespository) {
         this.driverRespository = driverRespository;
     }
 
-    public Driver addDriver(Driver driver)
+    public DriverResponse addDriver(DriverRequest driverData)
     {
-        return driverRespository.save(driver);
+        Driver driver = new Driver();
+        driverData.setId(driverData.getId());
+        driverData.setName(driverData.getName());
+        driverData.setUpiId(driverData.getUpiId());
+
+        Driver savedDetails = driverRespository.save(driver);
+        return DriverMapper.toResponse(savedDetails);
     }
+
 
     public Driver updateDriver(Long id, Driver driver)
     {

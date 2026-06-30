@@ -8,6 +8,7 @@ public class RidesecureApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RidesecureApplication.class, args);
+		System.out.println("Running");
 	}
 
 }

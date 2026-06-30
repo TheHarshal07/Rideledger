@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.request.DriverRequest;
+import com.example.demo.dto.response.DriverResponse;
 import com.example.demo.entity.Driver;
 import com.example.demo.service.DriverService;
-import org.springframework.stereotype.Controller;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +19,8 @@ public class DriverController {
     }
 
     @PostMapping
-    public Driver createDriver(@RequestBody Driver driver)
+    public DriverResponse createDriver(
+            @Valid @RequestBody DriverRequest driver)
     {
         return driverService.addDriver(driver);
     }
